@@ -15,7 +15,9 @@ Codex、Claude Code 和普通 macOS 应用。
 
 ## 网页使用说明
 
-[打开完整网页版说明书](docs/manual/index.html)，其中包含：
+[在线打开网页版说明书](https://hunduncn.github.io/joyconvibemouse/manual/) · [查看网页源码](docs/manual/index.html)
+
+说明书包含：
 
 - 蓝牙连接、权限授予和静置校准；
 - 普通按键层、SL Agent 副层和 ZR 体感层；
