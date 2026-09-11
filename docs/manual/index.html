@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ef5b66">
+  <meta name="description" content="Joy-Con Vibe Remote 体感鼠标与 Vibe Coding 遥控器使用说明书">
+  <title>Joy-Con Vibe Remote · 体感说明书</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='10' y='4' width='44' height='56' rx='20' fill='%23ef5b66' stroke='%231c2427' stroke-width='5'/%3E%3Ccircle cx='32' cy='23' r='7' fill='%231c2427'/%3E%3Ccircle cx='32' cy='43' r='4' fill='%23f5efdf' stroke='%231c2427' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#manual">跳到说明书正文</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="返回顶部">
+      <span class="brand-dot"></span>
+      <span>JOY-CON / VIBE REMOTE</span>
+    </a>
+    <nav class="top-nav" aria-label="章节导航">
+      <a href="#start">开始</a>
+      <a href="#controls">按键</a>
+      <a href="#workflow">用法</a>
+      <a href="#troubleshooting">排查</a>
+    </nav>
+    <button class="print-button" type="button" data-print>
+      <span aria-hidden="true">↗</span> 打印说明书
+    </button>
+  </header>
+
+  <main id="manual">
+    <section class="hero paper-section" aria-labelledby="hero-title">
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span>01</span> 一只手，也能继续 Vibe Coding</p>
+        <h1 id="hero-title">把 Joy-Con<br>变成你的<span>体感遥控器</span></h1>
+        <p class="hero-lede">
+          离开键盘也能移动光标、语音输入、提交提示词、处理中断与 Agent 选择。
+          这不是游戏模式，是一套为 macOS 远距离工作重新编排的手势语言。
+        </p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#start">60 秒开始使用 <span>↓</span></a>
+          <button class="text-action" type="button" data-open-guide>查看完整按键图</button>
+        </div>
+        <ul class="hero-mantra" aria-label="三个最重要的操作">
+          <li><b>ZR</b><span>握住移动</span></li>
+          <li><b>R</b><span>开口说话</span></li>
+          <li><b>SR</b><span>回车发送</span></li>
+        </ul>
+      </div>
+
+      <div class="hero-visual reveal" aria-label="Joy-Con 遥控器视觉示意">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="joycon-card">
+          <div class="joycon-top"><span>ZR</span><span>R</span></div>
+          <div class="joycon-shell">
+            <span class="plus">+</span>
+            <div class="face-buttons" aria-hidden="true">
+              <i class="key-x">X</i><i class="key-y">Y</i><i class="key-a">A</i><i class="key-b">B</i>
+            </div>
+            <span class="stick"></span>
+            <span class="home-key">⌂</span>
+          </div>
+          <div class="rail">
+            <span>SR</span><span>SL</span>
+          </div>
+          <span class="strap"></span>
+        </div>
+        <p class="scribble scribble-one">按住 ZR<br>手腕轻轻转动</p>
+        <p class="scribble scribble-two">松手即停<br>光标留在原位</p>
+      </div>
+    </section>
+
+    <section class="quick-strip" aria-label="快速记忆">
+      <p><span>记住这一句</span> ZR 是鼠标离合器 · SL 是 Agent 副层 · R 是语音入口</p>
+    </section>
+
+    <section class="section start-section" id="start" aria-labelledby="start-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow"><span>02</span> 第一次使用</p>
+        <h2 id="start-title">连接、授权、静置。<br>三步就绪。</h2>
+        <p>第一次完成后，日常只需要唤醒 Joy-Con 和打开菜单栏 App。</p>
+      </div>
+
+      <ol class="setup-steps">
+        <li class="setup-card reveal">
+          <span class="step-number">1</span>
+          <div class="step-icon bluetooth-icon" aria-hidden="true">ᛒ</div>
+          <h3>蓝牙连接</h3>
+          <p>打开 Mac「系统设置 → 蓝牙」，配对并连接 <b>Joy-Con (R)</b>。</p>
+          <small>指示灯循环闪烁表示仍在寻找连接。</small>
+        </li>
+        <li class="setup-card reveal">
+          <span class="step-number">2</span>
+          <div class="step-icon permission-icon" aria-hidden="true">✓</div>
+          <h3>允许控制</h3>
+          <p>首次启动时，在「隐私与安全性」中授予 App <b>辅助功能</b>权限。</p>
+          <small>若按键无响应，再检查「输入监控」。</small>
+        </li>
+        <li class="setup-card reveal">
+          <span class="step-number">3</span>
+          <div class="step-icon calibration-icon" aria-hidden="true">◎</div>
+          <h3>静置校准</h3>
+          <p>连接后把 Joy-Con 放稳约一秒，等菜单栏状态显示<b>已连接</b>。</p>
+          <small>每次按住 ZR 都会以当前握姿重新锚定方向。</small>
+        </li>
+      </ol>
+
+      <aside class="permission-note reveal">
+        <span class="tape"></span>
+        <strong>关于 R 语音键</strong>
+        <p>R 会向系统发送一次 Fn。请先在 macOS「键盘 → 听写」中，把单按 Fn 配置成你的语音输入快捷方式。</p>
+      </aside>
+    </section>
+
+    <section class="section controls-section ink-section" id="controls" aria-labelledby="controls-title">
+      <div class="section-heading light reveal">
+        <p class="eyebrow"><span>03</span> 三层操作逻辑</p>
+        <h2 id="controls-title">不用背整张键盘。<br>只要记住你正按着谁。</h2>
+      </div>
+
+      <div class="layer-switcher reveal">
+        <div class="layer-tabs" role="tablist" aria-label="选择按键层">
+          <button id="tab-normal" role="tab" aria-selected="true" aria-controls="panel-normal" tabindex="0" data-layer="normal">
+            <span>普通层</span><small>直接按</small>
+          </button>
+          <button id="tab-sl" role="tab" aria-selected="false" aria-controls="panel-sl" tabindex="-1" data-layer="sl">
+            <span>Agent 层</span><small>按住 SL</small>
+          </button>
+          <button id="tab-gyro" role="tab" aria-selected="false" aria-controls="panel-gyro" tabindex="-1" data-layer="gyro">
+            <span>体感层</span><small>按住 ZR</small>
+          </button>
+        </div>
+
+        <div class="layer-panel is-active" id="panel-normal" role="tabpanel" aria-labelledby="tab-normal" data-panel="normal">
+          <div class="panel-intro">
+            <b>日常主层</b>
+            <p>用于鼠标、输入、发送与基本导航。大多数时候，你只会用这一层。</p>
+          </div>
+          <div class="mapping-grid">
+            <article><kbd>R</kbd><div><b>语音输入</b><span>单次 Fn</span></div></article>
+            <article><kbd>SR</kbd><div><b>发送</b><span>Return / Enter</span></div></article>
+            <article><kbd>Y</kbd><div><b>鼠标左键</b><span>按住可拖动</span></div></article>
+            <article><kbd>B</kbd><div><b>鼠标右键</b><span>打开上下文菜单</span></div></article>
+            <article><kbd>X</kbd><div><b>删除</b><span>按住连续删除</span></div></article>
+            <article><kbd>A</kbd><div><b>返回 / 拒绝</b><span>Esc</span></div></article>
+            <article><kbd>+</kbd><div><b>切换应用</b><span>Command + Tab</span></div></article>
+            <article><kbd>⌂</kbd><div><b>状态面板</b><span>打开控制台</span></div></article>
+            <article><kbd>●</kbd><div><b>下一焦点</b><span>摇杆按下 = Tab</span></div></article>
+            <article><kbd>↕</kbd><div><b>滚动页面</b><span>摇杆上下</span></div></article>
+            <article><kbd>↔</kbd><div><b>左右方向键</b><span>摇杆左右</span></div></article>
+          </div>
+        </div>
+
+        <div class="layer-panel" id="panel-sl" role="tabpanel" aria-labelledby="tab-sl" data-panel="sl" hidden>
+          <div class="panel-intro">
+            <b>Agent 副层</b>
+            <p>按住 SL 不松手，再按下面的键；松开 SL 后立即回到普通层。</p>
+          </div>
+          <div class="mapping-grid accent-blue">
+            <article><kbd>SL + SR</kbd><div><b>换行但不发送</b><span>Shift + Enter</span></div></article>
+            <article><kbd>SL + A</kbd><div><b>强制中断</b><span>Control + C</span></div></article>
+            <article><kbd>SL + ●</kbd><div><b>上一焦点</b><span>Shift + Tab</span></div></article>
+            <article><kbd>SL + ↕</kbd><div><b>真正的上下键</b><span>菜单、历史、选择器</span></div></article>
+            <article class="wide"><kbd>SL + ⌂</kbd><div><b>特殊符号轮换</b><span>连续点 Home：/ → @ → $ → !</span></div></article>
+            <article class="wide inherited"><kbd>其他键</kbd><div><b>保持普通功能</b><span>R、Y、B、X、+ 等仍执行主层动作</span></div></article>
+          </div>
+        </div>
+
+        <div class="layer-panel" id="panel-gyro" role="tabpanel" aria-labelledby="tab-gyro" data-panel="gyro" hidden>
+          <div class="panel-intro">
+            <b>体感鼠标层</b>
+            <p>ZR 像相机快门：按下才移动，松开就停。每次按下都以当前握姿重新定位。</p>
+          </div>
+          <div class="gyro-guide">
+            <article>
+              <span class="gesture-icon yaw" aria-hidden="true">↔</span>
+              <div><b>左右转腕</b><p>光标横向移动。不需要大幅甩动，轻转即可。</p></div>
+            </article>
+            <article>
+              <span class="gesture-icon pitch" aria-hidden="true">↕</span>
+              <div><b>上下指向</b><p>光标纵向移动。保持手腕自然，不必刻意竖握。</p></div>
+            </article>
+            <article>
+              <span class="gesture-icon precision" aria-hidden="true">＋</span>
+              <div><b>ZR + SL 精细体感</b><p>速度降至当前精准比例，适合按钮、光标与小目标。</p></div>
+            </article>
+          </div>
+          <div class="clutch-demo" aria-label="体感离合器操作顺序">
+            <span><i>1</i>指向目标方向</span><b>→</b><span><i>2</i>按住 ZR 移动</span><b>→</b><span><i>3</i>松开 ZR 停住</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section guide-section" aria-labelledby="guide-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow"><span>04</span> 一张图记住全部</p>
+        <h2 id="guide-title">按键位置与动作对照</h2>
+        <p>这张手绘图对应 App 的默认映射；控制台中自定义之后，以你的当前配置为准。</p>
+      </div>
+      <figure class="guide-figure reveal">
+        <img src="../assets/joycon-button-guide-handdrawn-v3.png" alt="Joy-Con 默认按键映射手绘说明：包含 R、ZR、SR、SL、ABXY、加号、Home 与摇杆操作">
+        <figcaption><span>DEFAULT MAP / 2026</span> 点击图片可以放大查看</figcaption>
+        <button type="button" data-open-guide aria-label="放大完整按键图"></button>
+      </figure>
+    </section>
+
+    <section class="section workflow-section" id="workflow" aria-labelledby="workflow-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow"><span>05</span> Vibe Coding 实战</p>
+        <h2 id="workflow-title">从说出想法，<br>到控制 Agent。</h2>
+      </div>
+
+      <div class="workflow-board">
+        <article class="workflow-card coral reveal">
+          <span class="card-index">A</span>
+          <h3>说出需求</h3>
+          <ol>
+            <li><kbd>R</kbd> 开始系统听写</li>
+            <li>自然说出修改要求</li>
+            <li><kbd>R</kbd> 结束听写</li>
+            <li><kbd>SR</kbd> 回车发送</li>
+          </ol>
+          <p class="tip">长句建议分段说，使用 <kbd>SL + SR</kbd> 插入换行。</p>
+        </article>
+
+        <article class="workflow-card cyan reveal">
+          <span class="card-index">B</span>
+          <h3>处理 Agent 面板</h3>
+          <ol>
+            <li><kbd>SL + 摇杆↑↓</kbd> 移动选择</li>
+            <li><kbd>Tab</kbd> / <kbd>Shift+Tab</kbd> 切换焦点</li>
+            <li><kbd>SR</kbd> 确认当前选项</li>
+            <li><kbd>A</kbd> 拒绝或返回</li>
+          </ol>
+          <p class="tip">Codex 与 Claude Code 的具体审批键可能不同，方向键与 Enter 是最通用的组合。</p>
+        </article>
+
+        <article class="workflow-card yellow reveal">
+          <span class="card-index">C</span>
+          <h3>打断与修正</h3>
+          <ol>
+            <li><kbd>A</kbd> 发送 Esc，关闭或中断</li>
+            <li><kbd>SL + A</kbd> 强制发送 Control+C</li>
+            <li><kbd>X</kbd> 删除，按住连续删除</li>
+            <li><kbd>+</kbd> 快速切回上一应用</li>
+          </ol>
+          <p class="tip">强制中断只在确实需要时使用；部分终端空闲时 Control+C 可能清空输入。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section console-section" aria-labelledby="console-title">
+      <div class="console-mock reveal" aria-hidden="true">
+        <div class="console-top">
+          <span class="status-puck">◎</span>
+          <div><b>体感鼠标开启</b><small>Joy-Con (R)</small></div>
+          <em>75%</em>
+        </div>
+        <div class="console-line"><b>启用 Joy-Con 遥控</b><span class="fake-toggle on"></span></div>
+        <div class="console-fold"><span>◉ 体感调节</span><b>展开⌄</b></div>
+        <div class="console-fold active"><span>⌘ 按键自定义</span><b>收起⌃</b></div>
+        <div class="console-map"><span>SR</span><b>回车</b><i>换行但不发送</i></div>
+        <div class="console-map"><span>A</span><b>Esc</b><i>强制中断</i></div>
+        <div class="console-bottom"><span>☑ 登录时启动</span><b>蓝牙&nbsp;&nbsp; 退出</b></div>
+      </div>
+
+      <div class="console-copy reveal">
+        <p class="eyebrow"><span>06</span> 菜单栏控制台</p>
+        <h2 id="console-title">Home 一按，<br>所有设置都在这里。</h2>
+        <ul class="check-list">
+          <li><b>体感调节</b><span>灵敏度、水平倍率、加速度、稳定度、精准比例与方向反转。</span></li>
+          <li><b>按键自定义</b><span>每个实体键分别配置“单按”和“按住 SL 后”的动作。</span></li>
+          <li><b>重新校准</b><span>出现持续漂移或握姿改变明显时，让手柄静止后执行。</span></li>
+          <li><b>恢复默认</b><span>只恢复按键映射，不会改掉你的体感灵敏度。</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section troubleshooting-section" id="troubleshooting" aria-labelledby="trouble-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow"><span>07</span> 遇到问题</p>
+        <h2 id="trouble-title">先看状态，<br>再做最小动作。</h2>
+      </div>
+
+      <div class="faq-list reveal">
+        <details>
+          <summary><span>显示已连接，但所有按键都没反应</span><i>＋</i></summary>
+          <div><p>先关闭再开启控制台中的「启用 Joy-Con 遥控」。仍无响应时，检查辅助功能和输入监控权限，然后重新连接蓝牙。</p></div>
+        </details>
+        <details>
+          <summary><span>按住 ZR 后准星出现，鼠标却不移动</span><i>＋</i></summary>
+          <div><p>让 Joy-Con 静置约一秒等待初始化；随后松开 ZR，再重新按住。若一直显示初始化，可断开蓝牙后重新连接。</p></div>
+        </details>
+        <details>
+          <summary><span>光标持续漂移或按下 ZR 时跳一下</span><i>＋</i></summary>
+          <div><p>避免在按下 ZR 的瞬间快速甩动。把手柄稳定在准备使用的握姿，再按住 ZR；必要时打开控制台执行「重新校准」。</p></div>
+        </details>
+        <details>
+          <summary><span>左右或上下方向反了</span><i>＋</i></summary>
+          <div><p>打开「体感调节」，分别切换「水平反向」或「垂直反向」。两项独立生效，不必改变握法。</p></div>
+        </details>
+        <details>
+          <summary><span>移动太快、太抖，或很难停住</span><i>＋</i></summary>
+          <div><p>先微调整体灵敏度；小幅抖动优先提高稳定度，需要快速横移则调整水平倍率或加速度。一次只改一项，更容易找到合适手感。</p></div>
+        </details>
+        <details>
+          <summary><span>R 能开始听写，但不能按一次结束</span><i>＋</i></summary>
+          <div><p>确认 macOS 听写设置使用的是“单按 Fn 切换”，而不是“按两次 Fn”或其他组合键。R 本身只负责发送一次 Fn。</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="closing-section paper-section reveal">
+      <p class="eyebrow"><span>08</span> 最后记住</p>
+      <blockquote>“按住才移动，松开即停住；<br>需要第二层，就先握住 SL。”</blockquote>
+      <div class="closing-keys" aria-label="核心按键摘要">
+        <span><kbd>ZR</kbd> 体感</span>
+        <span><kbd>R</kbd> 语音</span>
+        <span><kbd>SR</kbd> 发送</span>
+        <span><kbd>SL</kbd> 副层</span>
+      </div>
+      <a href="#top">回到顶部 ↑</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>JOY-CON VIBE REMOTE</span>
+    <p>macOS 体感遥控器 · 网页说明书</p>
+    <time datetime="2026-09">2026 / 09</time>
+  </footer>
+
+  <dialog class="guide-dialog" data-guide-dialog aria-labelledby="dialog-title">
+    <div class="dialog-toolbar">
+      <div><b id="dialog-title">完整按键图</b><span>点击空白区域或按 Esc 关闭</span></div>
+      <button type="button" data-close-guide aria-label="关闭按键图">×</button>
+    </div>
+    <img src="../assets/joycon-button-guide-handdrawn-v3.png" alt="Joy-Con 默认按键映射完整手绘说明">
+  </dialog>
+</body>
+</html>

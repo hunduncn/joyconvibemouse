@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>zh_CN</string>
+    <key>CFBundleDisplayName</key>
+    <string>JoyCon Vibe Remote</string>
+    <key>CFBundleExecutable</key>
+    <string>JoyConVibeRemote</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.aqxp.JoyConVibeRemote</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>JoyCon Vibe Remote</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>0.1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>14.0</string>
+    <key>LSUIElement</key>
+    <true/>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>连接右 Joy-Con 并读取按键与体感传感器。</string>
+    <key>NSHumanReadableCopyright</key>
+    <string>Copyright © 2026 AQXP</string>
+    <key>NSInputMonitoringUsageDescription</key>
+    <string>读取右 Joy-Con 的按键、摇杆和陀螺仪数据。</string>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+</dict>
+</plist>
