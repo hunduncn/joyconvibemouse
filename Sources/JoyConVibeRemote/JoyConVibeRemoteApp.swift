@@ -108,6 +108,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         )
         image?.isTemplate = true
         statusItem?.button?.image = image
-        statusItem?.button?.toolTip = "JoyCon Vibe Remote · \(status.title)"
+        statusItem?.button?.toolTip = "Joy-Con Vibe Remote · \(status.title)"
     }
 }

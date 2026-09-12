@@ -91,7 +91,7 @@ HidGuardian 的作用也不是创建鼠标，而是控制哪些进程能看到�
 
 ## 3. 与当前 Swift 实现的对比
 
-| 层面 | BetterJoy | 当前 JoyCon Vibe Remote | 判断 |
+| 层面 | BetterJoy | 当前 Joy-Con Vibe Remote | 判断 |
 | --- | --- | --- | --- |
 | IMU 采样 | 每报告 3 × 5 ms | 同样逐个处理三子样本 | 已具备，不需照搬 |
 | 姿态融合 | Madgwick gyro + accel | 自有 quaternion / gravity 融合与偏置更新 | BetterJoy 可作交叉参考，不构成升级 |
@@ -136,4 +136,3 @@ Apple 官方 entitlement 文档将 `com.apple.developer.hid.virtual.device` 定�
 2. **不要安装或移植 ViGEm。** 它是 Windows 虚拟游戏手柄总线，与 macOS 和鼠标无关。
 3. **不要把 `SendInput` 误认为硬件鼠标。** BetterJoy 的输出与当前 `CGEvent` 都是平台级合成输入。
 4. **若仍要追求系统原生摇动放大，单独立项做虚拟 HID 可行性原型。** 前置门槛是 Apple entitlement 与签名；验收标准必须包含系统功能是否响应，而不只是光标能否移动。
-

@@ -4,7 +4,8 @@ set -euo pipefail
 script_dir="${0:A:h}"
 project_dir="${script_dir:h}"
 developer_dir="/Applications/Xcode.app/Contents/Developer"
-app_name="JoyCon Vibe Remote.app"
+app_name="Joy-Con Vibe Remote.app"
+legacy_app_name="JoyCon Vibe Remote.app"
 bundle_dir="${project_dir}/.build/app/${app_name}"
 contents_dir="${bundle_dir}/Contents"
 
@@ -34,9 +35,14 @@ codesign \
 
 if [[ "${1:-}" == "--install" ]]; then
     install_dir="/Applications/${app_name}"
-    if [[ "${install_dir}" != "/Applications/JoyCon Vibe Remote.app" ]]; then
+    if [[ "${install_dir}" != "/Applications/Joy-Con Vibe Remote.app" ]]; then
         print -u2 "Refusing to replace an unexpected application path."
         exit 1
+    fi
+    legacy_install_dir="/Applications/${legacy_app_name}"
+    if [[ -d "${legacy_install_dir}" ]]; then
+        rm -rf "${legacy_install_dir}"
+        print "Removed legacy app: ${legacy_install_dir}"
     fi
     rm -rf "${install_dir}"
     ditto "${bundle_dir}" "${install_dir}"

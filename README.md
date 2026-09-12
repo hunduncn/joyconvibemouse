@@ -1,8 +1,8 @@
-# JoyCon Vibe Remote
+# Joy-Con Vibe Remote
 
 > 把 Nintendo Switch Joy-Con 变成 macOS 的体感鼠标与 Vibe Coding 遥控器。
 
-JoyCon Vibe Remote 是一款常驻 macOS 菜单栏的轻量 App。它读取 Joy-Con 的
+Joy-Con Vibe Remote 是一款常驻 macOS 菜单栏的轻量 App。它读取 Joy-Con 的
 陀螺仪和加速度数据，让你通过手腕动作移动光标，同时把实体按键映射成鼠标、
 键盘和 Agent 常用操作。
 
@@ -15,7 +15,7 @@ Codex、Claude Code 和普通 macOS 应用。
 
 ## 网页使用说明
 
-[在线打开网页版说明书](https://hunduncn.github.io/joyconvibemouse/manual/) · [查看网页源码](docs/manual/index.html)
+[在线打开网页版说明书](https://hunduncn.github.io/joycon-vibe-remote/manual/) · [查看网页源码](docs/manual/index.html)
 
 说明书包含：
 
@@ -73,10 +73,10 @@ ZR + SL 的精准体感组合优先于 SL Agent 副层，不会误触发副层�
 ## 构建与安装
 
 ```bash
-git clone https://github.com/hunduncn/joyconvibemouse.git
-cd joyconvibemouse
+git clone https://github.com/hunduncn/joycon-vibe-remote.git
+cd joycon-vibe-remote
 ./scripts/build-app.sh --install
-open "/Applications/JoyCon Vibe Remote.app"
+open "/Applications/Joy-Con Vibe Remote.app"
 ```
 
 首次启动后：
@@ -89,7 +89,7 @@ open "/Applications/JoyCon Vibe Remote.app"
 构建脚本会生成并安装：
 
 ```text
-/Applications/JoyCon Vibe Remote.app
+/Applications/Joy-Con Vibe Remote.app
 ```
 
 ## macOS 听写设置
