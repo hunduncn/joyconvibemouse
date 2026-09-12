@@ -48,37 +48,46 @@ final class AppModel: ObservableObject {
     @Published private(set) var isCharging = false
     @Published private(set) var accessibilityTrusted = false
     @Published private(set) var errorMessage: String?
+    @Published private(set) var loginItemMessage: String?
 
     let settings: RemoteSettings
     var onShowStatus: (() -> Void)?
 
     private let eventEmitter = SystemEventEmitter()
-    private let loginItemManager = LoginItemManager()
+    private let loginItemManager: LoginItemManager
+    private let managesLoginItem: Bool
     private lazy var pointerMotionEmitter = PointerMotionEmitter(eventEmitter: eventEmitter)
     private var mapper = RemoteActionMapper()
     private var pointerEngine = GyroPointerEngine()
     private var pointerFrameBuffer = ClutchedPointerFrameBuffer()
     private var pointerTuningLifecycle = PointerTuningLifecycle()
-    private lazy var transport: JoyConHIDTransport = makeTransport()
+    private let transport: any JoyConTransport
     private var isConnected = false
+    private var hasStarted = false
 
-    init(settings: RemoteSettings) {
+    init(
+        settings: RemoteSettings,
+        transport: (any JoyConTransport)? = nil,
+        loginItemManager: LoginItemManager? = nil,
+        managesLoginItem: Bool = Bundle.main.bundleURL.pathExtension == "app"
+    ) {
         self.settings = settings
+        self.transport = transport ?? JoyConHIDTransport()
+        self.loginItemManager = loginItemManager ?? LoginItemManager()
+        self.managesLoginItem = managesLoginItem
+        configureTransport()
     }
 
     func start() {
+        guard !hasStarted else { return }
+        hasStarted = true
         accessibilityTrusted = eventEmitter.requestAccessibility(prompt: true)
-        if settings.launchAtLogin, Bundle.main.bundleURL.pathExtension == "app" {
-            do {
-                try loginItemManager.setEnabled(true)
-            } catch {
-                errorMessage = "无法启用登录时启动：\(error.localizedDescription)"
-            }
-        }
+        setLaunchAtLogin(settings.launchAtLogin)
         transport.start()
     }
 
     func stop() {
+        hasStarted = false
         transport.stop()
         releaseAllInputs()
     }
@@ -86,10 +95,7 @@ final class AppModel: ObservableObject {
     func setRemoteEnabled(_ enabled: Bool) {
         settings.enabled = enabled
         if enabled {
-            pointerEngine.beginCalibration()
-            pointerFrameBuffer.reset()
-            pointerMotionEmitter.reset()
-            if isConnected { updateStatus(.initializing) }
+            reconnect()
         } else {
             releaseAllInputs()
             pointerEngine.resetMotion()
@@ -99,14 +105,35 @@ final class AppModel: ObservableObject {
     }
 
     func setLaunchAtLogin(_ enabled: Bool) {
-        settings.launchAtLogin = enabled
-        guard Bundle.main.bundleURL.pathExtension == "app" else { return }
+        guard managesLoginItem else { return }
         do {
             try loginItemManager.setEnabled(enabled)
-            errorMessage = nil
+            refreshLoginItemStatus()
         } catch {
-            errorMessage = "登录启动设置失败：\(error.localizedDescription)"
+            settings.launchAtLogin = loginItemManager.isRegistered
+            loginItemMessage = "登录启动设置失败：\(error.localizedDescription)"
         }
+    }
+
+    private func refreshLoginItemStatus() {
+        guard managesLoginItem else { return }
+        let registered = loginItemManager.isRegistered
+        if settings.launchAtLogin != registered { settings.launchAtLogin = registered }
+        loginItemMessage = loginItemManager.requiresApproval
+            ? "登录启动等待批准，请在系统设置 → 通用 → 登录项中允许。也可取消勾选以撤销注册。"
+            : nil
+    }
+
+    func reconnect() {
+        hasStarted = true
+        releaseAllInputs()
+        transport.stop()
+        isConnected = false
+        updateTelemetry(batteryLevel: 0, isCharging: false)
+        pointerEngine.beginCalibration()
+        errorMessage = nil
+        updateStatus(.disconnected)
+        transport.start()
     }
 
     func recalibrate() {
@@ -142,6 +169,8 @@ final class AppModel: ObservableObject {
 
     func refreshPermissions() {
         accessibilityTrusted = eventEmitter.isAccessibilityTrusted
+        refreshLoginItemStatus()
+        if hasStarted && !transport.isRunning { reconnect() }
     }
 
     func requestAccessibility() {
@@ -162,8 +191,7 @@ final class AppModel: ObservableObject {
         NSWorkspace.shared.open(url)
     }
 
-    private func makeTransport() -> JoyConHIDTransport {
-        let transport = JoyConHIDTransport()
+    private func configureTransport() {
         transport.onConnected = { [weak self] name in
             guard let self else { return }
             self.isConnected = true
@@ -194,7 +222,6 @@ final class AppModel: ObservableObject {
             self.errorMessage = message
             self.updateStatus(.error)
         }
-        return transport
     }
 
     private func handle(frame: JoyConInputFrame) {

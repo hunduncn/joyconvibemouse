@@ -72,6 +72,22 @@ ZR + SL 的精准体感组合优先于 SL Agent 副层，不会误触发副层�
 
 ## 构建与安装
 
+从源码构建需要 **完整 Xcode 16 或更新版本（包含 Swift 6+ 和 macOS SDK）**。
+请安装与本机 macOS 兼容的 Xcode，并先打开一次完成组件安装及许可确认。
+仅安装 `xcode-select --install` 提供的命令行工具不够：部分 SwiftUI SDK 需要完整
+Xcode 中的编译插件。安装后可检查当前工具：
+
+```bash
+xcode-select -p
+xcrun swift --version
+```
+
+脚本优先使用当前选中的完整 Xcode；若仅选中了命令行工具，会通过 Spotlight
+查找已安装的 Xcode。也支持通过 `DEVELOPER_DIR` 指定其他 Xcode，
+例如 `DEVELOPER_DIR="/Applications/Xcode-beta.app/Contents/Developer" ./scripts/build-app.sh`。
+若 Swift 版本不足，请先更新开发工具。
+若 Spotlight 未能找到 Xcode，请手动指定上述路径。
+
 ```bash
 git clone https://github.com/hunduncn/joycon-vibe-remote.git
 cd joycon-vibe-remote
@@ -91,6 +107,24 @@ open "/Applications/Joy-Con Vibe Remote.app"
 ```text
 /Applications/Joy-Con Vibe Remote.app
 ```
+
+若当前账户不能写入 `/Applications`，可安装到个人目录，无需使用 `sudo`：
+
+```bash
+./scripts/build-app.sh --install --install-dir "$HOME/Applications"
+open "$HOME/Applications/Joy-Con Vibe Remote.app"
+```
+
+升级时，脚本先复制并校验新版，再正常退出安装目录中的旧 App 并替换。
+若退出失败会中止；若替换失败会恢复旧版。成功升级后的旧版备份保留在安装目录的
+`.joycon-vibe-remote-install.*` 隐藏目录中，终端会显示具体路径。确认新版可用后可自行删除备份。
+第三方声明也包含在生成 App 的 `Contents/Resources/THIRD_PARTY_NOTICES.md` 中。
+
+授权后仍无响应时，可点击错误提示中的「重新连接」，或关闭再开启「启用 Joy-Con 遥控」。
+打开控制台时也会重试此前打开失败的设备连接。如果 macOS 提示必须退出并重新打开，
+请先退出 App，再从安装位置启动。
+
+“登录时启动”若等待系统批准，控制台会显示提示；取消勾选会撤销待批准的注册。
 
 ## macOS 听写设置
 
@@ -125,7 +159,8 @@ scripts/build-app.sh          Release 构建与安装脚本
 ## 开发与测试
 
 ```bash
-DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcrun swift test
+DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer" xcrun swift test
+python3 scripts/test-install.py
 ```
 
 也可以在 Xcode 中直接打开 `Package.swift`。核心解析、体感算法和按键映射与

@@ -5,7 +5,18 @@ import JoyConVibeCore
 private let nintendoVendorID = 0x057E
 private let rightJoyConProductID = 0x2007
 
-final class JoyConHIDTransport {
+protocol JoyConTransport: AnyObject {
+    var onConnected: ((String) -> Void)? { get set }
+    var onDisconnected: (() -> Void)? { get set }
+    var onRecovering: (() -> Void)? { get set }
+    var onFrame: ((JoyConInputFrame) -> Void)? { get set }
+    var onError: ((String) -> Void)? { get set }
+    var isRunning: Bool { get }
+    func start()
+    func stop()
+}
+
+final class JoyConHIDTransport: JoyConTransport {
     var onConnected: ((String) -> Void)?
     var onDisconnected: (() -> Void)?
     var onRecovering: (() -> Void)?
@@ -14,7 +25,7 @@ final class JoyConHIDTransport {
 
     private let manager: IOHIDManager
     private var session: JoyConHIDSession?
-    private var isRunning = false
+    private(set) var isRunning = false
 
     init() {
         manager = IOHIDManagerCreate(kCFAllocatorDefault, IOOptionBits(kIOHIDOptionsTypeNone))
@@ -47,8 +58,10 @@ final class JoyConHIDTransport {
 
         let result = IOHIDManagerOpen(manager, IOOptionBits(kIOHIDOptionsTypeNone))
         if result != kIOReturnSuccess {
-            isRunning = false
-            onError?("无法读取右 Joy-Con（IOKit 错误 \(result)）。请检查输入监控权限。")
+            // Opening can fail after callbacks have already been scheduled.
+            // Tear those down before allowing a later permission retry.
+            stop()
+            onError?("无法读取右 Joy-Con（IOKit 错误 \(result)）。请授予输入监控权限后点击「重新连接」；若系统要求退出并重新打开，请重启 App。")
         }
     }
 
@@ -68,7 +81,7 @@ final class JoyConHIDTransport {
     }
 
     fileprivate func didMatch(device: IOHIDDevice) {
-        guard session == nil else { return }
+        guard isRunning, session == nil else { return }
         let productName = IOHIDDeviceGetProperty(device, kIOHIDProductKey as CFString) as? String
             ?? "Joy-Con (R)"
         let newSession = JoyConHIDSession(device: device)

@@ -35,6 +35,11 @@ struct StatusMenuView: View {
                 if let error = model.errorMessage {
                     errorNotice(error)
                 }
+                if let message = model.loginItemMessage {
+                    Text(message)
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                }
 
                 Divider()
 
@@ -126,6 +131,7 @@ struct StatusMenuView: View {
                 .font(.caption)
                 .foregroundStyle(.red)
             HStack {
+                Button("重新连接") { model.reconnect() }
                 Button("输入监控设置") { model.openInputMonitoringSettings() }
                 Button("蓝牙设置") { model.openBluetoothSettings() }
             }
